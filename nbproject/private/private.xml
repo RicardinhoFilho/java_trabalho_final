@@ -3,16 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/IFuncionarioDAO.java</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/web/inicial_administrador.jsp</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/web/login-funcionario.jsp</file>
-            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/header.jsp</file>
-            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/DAOFuncionario.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/chamados.jsp</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/DAO/DAOFuncionario.java</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/model/Funcionario.java</file>
-            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/menu.jsp</file>
-            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/servlets/funcionario/LoginFuncionario.java</file>
-            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/index.jsp</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/produtos.jsp</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/IProdutoDAO.java</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/IDAO.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/servlets/funcionario/Produtos/CriarProduto.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/IFuncionarioDAO.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/header.jsp</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/menu.jsp</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/utils/SqlUtils.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/servlets/funcionario/Produtos/ListaProdutos.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/servlets/funcionario/LoginFuncionario.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/servlets/funcionario/Produtos/ExcluirProduto.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/web/index.jsp</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/DAO/DAOProduto.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/ConnectionDAO.java</file>
+            <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/model/Produto.java</file>
         </group>
     </open-files>
 </project-private>

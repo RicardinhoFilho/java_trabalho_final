@@ -4,17 +4,14 @@
  */
 package com.beibe.database;
 
+import com.beibe.model.Resposta;
+import java.util.List;
+
 /**
  *
  * @author User
  */
-public interface IDAO<T> {
-      public void novo(T vo);
-
-
-    public T buscar(int id);
-
-    public java.util.List<T> listaTodos();
+public interface IDAOResposta extends IDAO<Resposta> {
     
-    
+    List<Resposta> listaTodosPorChamado(Integer id);
 }

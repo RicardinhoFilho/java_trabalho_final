@@ -4,17 +4,14 @@
  */
 package com.beibe.database;
 
+import com.beibe.model.Chamado;
+
 /**
  *
  * @author User
  */
-public interface IDAO<T> {
-      public void novo(T vo);
-
-
-    public T buscar(int id);
-
-    public java.util.List<T> listaTodos();
+public interface IChamadoDAO extends IDAO<Chamado> {
+    
     
     
 }

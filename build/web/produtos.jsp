@@ -124,50 +124,7 @@
                         </a>
 
                         <!-- Sidenav Menu Heading (Core)-->
-                        <div class="sidenav-menu-heading">Menu</div>
-                        <!-- Sidenav Accordion (Dashboard)-->
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                            Administrador
-                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
-                            <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="index.html">Métricas</a>
-                                <a class="nav-link" href="listarUsu.html">Listar usuários</a>
-                                <a class="nav-link" href="usuarios.html">Cadastrar usuários</a>
-                                <a class="nav-link" href="produtos.html">Listar produtos</a>
-                                <a class="nav-link" href="categorias.html">Listar categorias</a>
-                                <a class="nav-link" href="relatorios.html">Relatórios</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapsess" aria-expanded="false" aria-controls="collapseDashboards">
-                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                            Funcionários
-                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsess" data-bs-parent="#accordionSidenavs">
-                            <nav class="sidenav-menu-nested nav accordion" id="accordions">
-                                <a class="nav-link" href="tickets.html">Chamados</a>
-                                <a class="nav-link" href="produtos.html">Listar produtos</a>
-                                <a class="nav-link" href="categorias.html">Listar categorias</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapseDashboards">
-                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                            Cliente
-                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapse" data-bs-parent="#accordionSidenav">
-                            <nav class="sidenav-menu-nested nav accordion" id="accordion">
-                                <a class="nav-link" href="meusTickets.html">Meus chamados</a>
-                                <a class="nav-link" href="editarCliente.html">Alterar cadastro</a>
-                            </nav>
-                        </div>
-
-
-                        <!-- Sidenav Heading (Custom)-->
-                    </div>
+                         <jsp:include page="menu.jsp"/>
                 </div>
             </nav>
 

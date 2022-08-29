@@ -56,7 +56,7 @@
                 </a>
                 <div class="collapse" id="collapsess" data-bs-parent="#accordionSidenavs">
                     <nav class="sidenav-menu-nested nav accordion" id="accordions">
-                          <a class="nav-link" href="chamados.jsp">Chamados</a>
+                          <a class="nav-link" href="ListarChamados">Chamados</a>
                         <a class="nav-link" href="ListaProdutos">Listar produtos</a>
                         <a class="nav-link" href="categorias.html">Listar categorias</a>
                     </nav>
