@@ -4,14 +4,13 @@
  */
 package com.beibe.database;
 
-import com.beibe.model.Chamado;
+import com.beibe.model.Categoria;
 
 /**
  *
  * @author User
  */
-public interface IChamadoDAO extends IDAO<Chamado> {
+public interface ICategoriaDAO extends IDAO<Categoria> {
     
-    public void finaliza(Integer id);
-    
+ 
 }

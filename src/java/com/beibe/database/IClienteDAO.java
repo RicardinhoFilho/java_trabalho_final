@@ -4,14 +4,14 @@
  */
 package com.beibe.database;
 
-import com.beibe.model.Chamado;
+import com.beibe.model.Cliente;
 
 /**
  *
  * @author User
  */
-public interface IChamadoDAO extends IDAO<Chamado> {
+public interface IClienteDAO extends IDAO{
     
-    public void finaliza(Integer id);
+    Cliente buscaPorEmail(String email);
     
 }

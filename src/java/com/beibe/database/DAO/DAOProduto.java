@@ -44,6 +44,23 @@ public class DAOProduto implements IProdutoDAO {
 
     }
 
+    public void editar(Produto vo) {
+        //não sei pq isso n ta funcionando jhahaha, se alguem descobrir S2 by Ricardinho
+        try {
+            PreparedStatement st = conn.prepareStatement("update  produto set nome = ?, preco =?, saldo= ?, validade = ? where id = ? ");
+            st.setString(1, vo.getNome());
+            st.setDouble(2, vo.getPreco());
+            st.setDate(3, SqlUtils.convert(vo.getValidade()));
+            st.setInt(4, vo.getSaldo());
+            st.setInt(5, vo.getId());
+
+            st.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
     @Override
     public Produto buscar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

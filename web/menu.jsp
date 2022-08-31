@@ -38,10 +38,11 @@
                 <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                         <a class="nav-link" href="index.html">Métricas</a>
-                        <a class="nav-link" href="listarUsu.html">Listar usuários</a>
+                        <a class="nav-link" href="lista-usuarios.jsp">Listar usuários</a>
                         <a class="nav-link" href="usuarios.html">Cadastrar usuários</a>
-                        <a class="nav-link" href="produtos.html">Listar produtos</a>
-                        <a class="nav-link" href="categorias.html">Listar categorias</a>
+                        <a class="nav-link" href="ListarChamados">Chamados</a>
+                        <a class="nav-link" href="ListaProdutos">Listar produtos</a>
+                        <a class="nav-link" href="ListaCategorias">Listar categorias</a>
                         <a class="nav-link" href="relatorios.html">Relatórios</a>
                     </nav>
                 </div>
@@ -58,7 +59,7 @@
                     <nav class="sidenav-menu-nested nav accordion" id="accordions">
                           <a class="nav-link" href="ListarChamados">Chamados</a>
                         <a class="nav-link" href="ListaProdutos">Listar produtos</a>
-                        <a class="nav-link" href="categorias.html">Listar categorias</a>
+                        <a class="nav-link" href="ListaCategorias">Listar categorias</a>
                     </nav>
                 </div>
                 </c:if>
@@ -74,7 +75,7 @@
                 </a>
                 <div class="collapse" id="collapse" data-bs-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordion">
-                        <a class="nav-link" href="chamados.jsp">Meus chamados</a>
+                        <a class="nav-link" href="MeusChamados">Meus chamados</a>
                         <a class="nav-link" href="editarCliente.html">Alterar cadastro</a>
                     </nav>
                 </div>

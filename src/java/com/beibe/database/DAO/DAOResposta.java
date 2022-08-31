@@ -31,26 +31,25 @@ public class DAOResposta implements IDAOResposta {
     @Override
     public void novo(Resposta vo) {
 
-            try {
+        try {
             PreparedStatement st = conn.prepareStatement("Insert into resposta( texto, chamado_id, funcionario_id) "
                     + "values(?, ?, ?)");
-            
-            if(vo.getFuncionario() == null ){
+
+            if (vo.getFuncionario() == null) {
                 st = conn.prepareStatement("Insert into resposta( texto, chamado_id) "
-                    + "values(?, ?)");
+                        + "values(?, ?)");
             }
-            
+
             st.setString(1, vo.getTexto());
             st.setDouble(2, vo.getId());
-         if(vo.getFuncionario() != null){
-            st.setInt(3, vo.getFuncionario().getId()); 
-         }
-           System.out.println("DAO + "+ vo.getTexto());
+            if (vo.getFuncionario() != null) {
+                st.setInt(3, vo.getFuncionario().getId());
+            }
+            System.out.println("DAO + " + vo.getTexto());
             st.execute();
         } catch (Exception e) {
             System.out.println(e);
         }
-
 
     }
 
@@ -69,8 +68,8 @@ public class DAOResposta implements IDAOResposta {
         List<Resposta> respostas = new ArrayList<Resposta>();
         try {
 
-            PreparedStatement st = conn.prepareStatement("select * from resposta full join funcionario on funcionario.id   "
-                    + "= funcionario_id where chamado_id = ?");
+            PreparedStatement st = conn.prepareStatement("select * from resposta left join funcionario on funcionario.id   "
+                    + "= funcionario_id where chamado_id = ? ");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             System.out.println(rs);
@@ -80,18 +79,18 @@ public class DAOResposta implements IDAOResposta {
                 resposta.setId(rs.getInt("id"));
                 resposta.setTexto(rs.getString("texto"));
                 resposta.setCriacao(rs.getDate("criacao"));
-              
-                 if ((Integer) rs.getObject("funcionario_id") != null) {
+
+                if ((Integer) rs.getObject("funcionario_id") != null) {
                     funcionario.setId(rs.getInt("funcionario_id"));
-                   funcionario.setNome(rs.getString("nome"));
-                   funcionario.setSobrenome(rs.getString("sobrenome"));
+                    funcionario.setNome(rs.getString("nome"));
+                    funcionario.setSobrenome(rs.getString("sobrenome"));
                     funcionario.setEmail(rs.getString("email"));
 
                     resposta.setFuncionario(funcionario);
 
                 }
-                System.out.println("ID: " +id + resposta.getTexto());
-                
+                System.out.println("ID: " + id + resposta.getTexto());
+
                 respostas.add(resposta);
 
             }

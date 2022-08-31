@@ -47,8 +47,48 @@ public class DAOChamado implements IChamadoDAO {
     public Chamado buscar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    
 
-    @Override
+   
+            public List<Chamado> listaMeusChamados(Integer user_id) {
+
+        List<Chamado> chamados = new ArrayList<Chamado>();
+        try {
+
+            PreparedStatement st = conn.prepareStatement("select * from chamado inner join cliente on cliente_id = cliente.id where cliente.id = ?");
+            st.setInt(1, user_id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+
+                Chamado chamado = new Chamado();
+                Cliente cliente = new Cliente();
+                chamado.setId(rs.getInt("id"));
+                chamado.setTitulo(rs.getString("titulo"));
+                chamado.setTexto(rs.getString("texto"));
+                chamado.setFinalizado(rs.getBoolean("finalizado"));
+                chamado.setCriacao(rs.getDate("criacao"));
+                cliente.setId(rs.getInt("cliente_id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setSobrenome(rs.getString("sobrenome"));
+                cliente.setEmail(rs.getString("email"));
+
+                chamado.setCliente(cliente);
+                DAOResposta daoResposta = new DAOResposta(new ConnectionDAO().conectaDB());
+
+                chamado.setRepostas(daoResposta.listaTodosPorChamado(chamado.getId()));
+
+                chamados.add(chamado);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+        return chamados;
+
+    }
     public List<Chamado> listaTodos() {
 
         List<Chamado> chamados = new ArrayList<Chamado>();
@@ -85,5 +125,15 @@ public class DAOChamado implements IChamadoDAO {
         return chamados;
 
     }
+
+    @Override
+    public void finaliza(Integer id) {
+  try {
+            PreparedStatement st = conn.prepareStatement("update chamado set finalizado = true where id = ?;");
+            st.setInt(1, id);
+            st.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }    }
 
 }

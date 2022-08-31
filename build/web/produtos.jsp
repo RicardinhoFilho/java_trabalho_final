@@ -188,10 +188,54 @@
                                             <td><c:out value="${item.validade}" /></td>
                                             <td><c:out value="${item.saldo}" /></td>
                                             <td>
-                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2" type="button" data-bs-toggle="modal" data-bs-target="#editGroupModal">Editar</button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2" type="button" data-bs-toggle="modal" data-bs-target="#editGroupModal<c:out value="${item.id}" />">Editar</button>
                                                 <a class="btn btn-datatable btn-icon btn-transparent-dark" href="ExcluirProduto?id=<c:out value="${item.id}" />">Excluir</a>
                                             </td>
                                             </tr>
+                                            
+                                            
+                                             <!-- Edit group modal-->
+                    <div class="modal fade" id="editGroupModal<c:out value="${item.id}" />" tabindex="-1" role="dialog" aria-labelledby="editGroupModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editGroupModalLabel">Editar produto</h5>
+                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="EditarProduto?id=<c:out value="${item.id}"/>" method="post">
+                                      
+                                          <div class="mb-0">
+                                            <label class="mb-1 small text-muted" for="formGroupName">Nome do produto: </label>
+                                            <input name="nome" class="form-control" id="formGroupName" type="text" placeholder="Digite o nome do produto" value="<c:out value="${item.nome}" />"/>
+                                        </div>
+                                          <div class="mb-0">
+                                            <label class="mb-1 small text-muted" for="formGroupName">Saldo disponível: </label>
+                                            <input class="form-control" name="saldo"  id="formSaldo" type="text" placeholder="Digite o saldo" value="<c:out value="${item.saldo}" />" />
+                                        </div>
+                                        <div class="mb-0">
+                                            <label class="mb-1 small text-muted" for="formGroupName">Data de validade: </label>
+                                            <input name="validade" class="form-control" id="formQtdEdit" type="date"  />
+                                        </div>
+                                        <div class="mb-0">
+                                            <label class="mb-1 small text-muted" for="formGroupName">Preço: </label>
+                                            <input name="preco" class="form-control" id="formPrecoEdit" type="number" placeholder="Digite o preço" value="<c:out value="${item.preco}" />" />
+                                        </div>
+                                        
+                                          <div class="modal-footer">
+                                    <button class="btn btn-danger-soft text-danger" type="button" data-bs-dismiss="modal">Cancelar</button>
+                                    <button class="btn btn-primary-soft text-light" type="submit">Salvar</button>
+                                </div>
+
+                                    </form>
+                                        </div>
+                                        </div>
+                                </div>
+                              
+                            </div>
+                                         
+                    </div>
+                                            
                                     </c:forEach>
                                     
                                        
@@ -237,42 +281,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Edit group modal-->
-                    <div class="modal fade" id="editGroupModal" tabindex="-1" role="dialog" aria-labelledby="editGroupModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editGroupModalLabel">Editar produto</h5>
-                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-0">
-                                            <label class="mb-1 small text-muted" for="formGroupName">Nome do produto: </label>
-                                            <input class="form-control" id="formGroupName" type="text" placeholder="Digite o nome do produto" />
-                                        </div>
-                                        <div class="mb-0">
-                                            <label class="mb-1 small text-muted" for="formGroupName">Saldo disponível: </label>
-                                            <input class="form-control" id="formSaldoEdit" type="text" placeholder="Digite o saldo" />
-                                        </div>
-                                        <div class="mb-0">
-                                            <label class="mb-1 small text-muted" for="formGroupName">Data de validade: </label>
-                                            <input class="form-control" id="formQtdEdit" type="date"  />
-                                        </div>
-                                        <div class="mb-0">
-                                            <label class="mb-1 small text-muted" for="formGroupName">Preço: </label>
-                                            <input class="form-control" id="formPrecoEdit" type="number" placeholder="Digite o preço" />
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-danger-soft text-danger" type="button" data-bs-dismiss="modal">Cancelar</button>
-                                    <button class="btn btn-primary-soft text-light" type="button">Salvar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </main>
 
             </div>

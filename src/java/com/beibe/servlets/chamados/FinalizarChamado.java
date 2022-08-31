@@ -2,30 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.beibe.servlets.funcionario.Produtos;
+package com.beibe.servlets.chamados;
 
 import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOProduto;
+import com.beibe.database.DAO.DAOChamado;
+import com.beibe.database.DAO.DAOResposta;
 import com.beibe.model.Funcionario;
-import com.beibe.model.Produto;
-import jakarta.servlet.RequestDispatcher;
+import com.beibe.model.Resposta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "CriarProduto", urlPatterns = {"/CriarProduto"})
-public class CriarProduto extends HttpServlet {
+@WebServlet(name = "FinalizarChamado", urlPatterns = {"/FinalizarChamado"})
+public class FinalizarChamado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +36,27 @@ public class CriarProduto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         try {
-             HttpSession session = request.getSession(false);
+            
+            Integer id = Integer.parseInt(request.getParameter("id"));
+
+            DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
+
+            HttpSession session = request.getSession(false);
             Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
-
+            
             if (funcionario != null) {
-            String nome = request.getParameter("nome");
-            Integer saldo = Integer.parseInt(request.getParameter("saldo"));
-            Date validade =new Date();// new SimpleDateFormat("yyy/MM/dd").parse(request.getParameter("validade"));
-            Double preco = Double.parseDouble(request.getParameter("preco"));
-
-            DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
-            Produto produto = new Produto();
-            produto.setNome(nome);
-            produto.setValidade(validade);
-            produto.setPreco(preco);
-            produto.setSaldo(saldo);
-            dao.novo(produto);
+               
+                dao.finaliza(id);
             }
             
-               response.sendRedirect("ListaProdutos");
-             
 
-           
+            response.sendRedirect("ListarChamados");
 
         } catch (Exception e) {
-   System.out.println(e);
+                    response.sendRedirect("index.jsp");
+            System.out.println(e);
         }
     }
 

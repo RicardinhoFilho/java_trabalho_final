@@ -41,7 +41,7 @@ public class CriarResposta extends HttpServlet {
         try {
             String texto = request.getParameter("texto");
             Integer id = Integer.parseInt(request.getParameter("id"));
-
+            
             DAOResposta dao = new DAOResposta(new ConnectionDAO().conectaDB());
 
             HttpSession session = request.getSession(false);
@@ -53,10 +53,15 @@ public class CriarResposta extends HttpServlet {
                 resposta.setFuncionario(funcionario);
 
             }
-            System.out.println(resposta.getTexto());
+            System.out.println("ESSA É A RESPOSTA: " + resposta.getTexto());
             dao.novo(resposta);
 
-            response.sendRedirect("ListarChamados");
+            if (funcionario != null) {
+                 response.sendRedirect("ListarChamados");
+              
+
+            }
+             response.sendRedirect("MeusChamados");
 
         } catch (Exception e) {
             System.out.println(e);

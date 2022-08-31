@@ -8,24 +8,21 @@ import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOProduto;
 import com.beibe.model.Funcionario;
 import com.beibe.model.Produto;
-import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Date;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "CriarProduto", urlPatterns = {"/CriarProduto"})
-public class CriarProduto extends HttpServlet {
+@WebServlet(name = "EditarProduto", urlPatterns = {"/EditarProduto"})
+public class EditarProduto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +35,33 @@ public class CriarProduto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         try {
-             HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession(false);
             Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
 
             if (funcionario != null) {
-            String nome = request.getParameter("nome");
-            Integer saldo = Integer.parseInt(request.getParameter("saldo"));
-            Date validade =new Date();// new SimpleDateFormat("yyy/MM/dd").parse(request.getParameter("validade"));
-            Double preco = Double.parseDouble(request.getParameter("preco"));
-
-            DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
-            Produto produto = new Produto();
-            produto.setNome(nome);
-            produto.setValidade(validade);
-            produto.setPreco(preco);
-            produto.setSaldo(saldo);
-            dao.novo(produto);
+                Integer id = Integer.parseInt(request.getParameter("id"));
+                String nome = request.getParameter("nome");
+                Integer saldo = Integer.parseInt(request.getParameter("saldo"));
+                Date validade = new Date();// new SimpleDateFormat("yyy/MM/dd").parse(request.getParameter("validade"));
+                Double preco = Double.parseDouble(request.getParameter("preco"));
+                //System.out.println("PRODUTO: " + id + " " + nome + " " + saldo + " " + preco " ");
+                DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
+                Produto produto = new Produto();
+                produto.setNome(nome);
+                produto.setValidade(validade);
+                produto.setPreco(preco);
+                produto.setSaldo(saldo);
+                System.out.println("SALDO: " + produto.getSaldo());
+                produto.setId(id);
+                dao.editar(produto);
             }
-            
-               response.sendRedirect("ListaProdutos");
-             
 
-           
+            response.sendRedirect("ListaProdutos");
 
         } catch (Exception e) {
-   System.out.println(e);
+            System.out.println(e);
         }
     }
 

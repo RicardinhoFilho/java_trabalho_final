@@ -4,6 +4,12 @@
  */
 package com.beibe.servlets.cliente;
 
+import com.beibe.database.ConnectionDAO;
+import com.beibe.database.DAO.DAOCliente;
+import com.beibe.database.DAO.DAOFuncionario;
+import com.beibe.model.Cliente;
+import com.beibe.model.Funcionario;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -30,18 +37,39 @@ public class LoginCliente extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginCliente</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginCliente at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        Cliente cliente = null;
+         System.out.println(email + " "+ email);
+        try {
+
+            DAOCliente dao = new DAOCliente(new ConnectionDAO().conectaDB());
+            cliente = dao.buscaPorEmail(email);
+             
+            if (cliente.getId() != null) {
+                System.out.println(cliente.getSenha() + "==" + senha);
+                if (senha.equals(cliente.getSenha())) {
+                    
+                    System.out.println("SENHAS IGUAIS");
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("cliente", cliente);
+                    response.sendRedirect("index.jsp");
+                } else {
+
+                    request.setAttribute("msg", "Dados de Login inválidos!");
+
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-cliente.jsp");
+                          rd.forward(request, response);
+                          return;
+                }
+            }
+
+        } catch (Exception e) {
+            request.setAttribute("msg", "Não foi possível efetuar o login!");
+
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-cliente.jsp");
+            rd.forward(request, response);
+            return;
         }
     }
 
