@@ -14,6 +14,7 @@ import java.util.List;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.beibe.utils.SqlUtils;
+import com.beibe.utils.exceptions.DAOException;
 
 /**
  *
@@ -28,7 +29,7 @@ public class DAOProduto implements IProdutoDAO {
     }
 
     @Override
-    public void novo(Produto vo) {
+    public void criar(Produto vo) {
 
         try {
             PreparedStatement st = conn.prepareStatement("Insert into produto( nome, preco, validade, saldo) "
@@ -62,12 +63,7 @@ public class DAOProduto implements IProdutoDAO {
     }
 
     @Override
-    public Produto buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Produto> listaTodos() {
+    public List<Produto> listarTodos() {
         List<Produto> produtos = new ArrayList<Produto>();
         try {
 
@@ -103,5 +99,15 @@ public class DAOProduto implements IProdutoDAO {
             System.out.println(e);
         }
 
+    }
+
+    @Override
+    public void atualizar(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void excluir(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

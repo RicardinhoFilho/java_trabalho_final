@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.beibe.servlets.funcionario.Produtos;
+package com.beibe.servlets.Produtos;
 
 import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOProduto;
+import com.beibe.model.Produto;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,13 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "ExcluirProduto", urlPatterns = {"/ExcluirProduto"})
-public class ExcluirProduto extends HttpServlet {
+@WebServlet(name = "ListaProdutos", urlPatterns = {"/ListaProdutos"})
+public class ListarProdutos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +35,15 @@ public class ExcluirProduto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-          try {
-            Integer id = Integer.parseInt(request.getParameter("id"));
+        try {
+
             DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
 
-           dao.excluirProduto(id);
-             response.sendRedirect("ListaProdutos");
-
             
+            request.setAttribute("produtos", dao.listarTodos());
+
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/produtos.jsp");
+            rd.forward(request, response);
 
         } catch (Exception e) {
             System.out.println(e);

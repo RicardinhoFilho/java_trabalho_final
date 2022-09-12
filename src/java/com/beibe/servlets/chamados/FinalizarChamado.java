@@ -48,7 +48,7 @@ public class FinalizarChamado extends HttpServlet {
             
             if (funcionario != null) {
                
-                dao.finaliza(id);
+                dao.atualizar(id);
             }
             
 

@@ -50,7 +50,7 @@ public class ListarChamados extends HttpServlet {
                           DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
                           
              
-                         request.setAttribute("chamados", dao.listaTodos());
+                         request.setAttribute("chamados", dao.listarTodos());
                    
                               RequestDispatcher rd = getServletContext().getRequestDispatcher("/chamados.jsp");
             rd.forward(request, response);

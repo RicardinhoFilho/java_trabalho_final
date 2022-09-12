@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.beibe.servlets.caretegoria;
+package com.beibe.servlets.categoria;
 
 import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOCategoria;
+import com.beibe.facade.CategoriaFacade;
 import com.beibe.model.Categoria;
 import com.beibe.model.Funcionario;
+import com.beibe.utils.exceptions.categoriaExceptions.ExcluirCategoriaException;
 import java.io.IOException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,28 +36,28 @@ public class ExcluirCategoria extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
+        
 
         try {
-
-            HttpSession session = request.getSession(false);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            HttpSession session = request.getSession(false) ;
             Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
 
             if (funcionario != null) {
-                DAOCategoria dao = new DAOCategoria(new ConnectionDAO().conectaDB());
                 
-
-                dao.excluir(id);
-
+                CategoriaFacade.excluirCategoria(id);
                 response.sendRedirect("ListaCategorias");
 
             } else {
                 response.sendRedirect("login-funcionario.jsp");
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
-            response.sendRedirect("login-funcionario.jsp");
+        }catch (ExcluirCategoriaException e) {
+            e.printStackTrace();
+            response.sendRedirect("erro.jsp");
+        }catch(NumberFormatException e){
+            e.printStackTrace();
+            response.sendRedirect("erro.jsp");
         }
     }
 

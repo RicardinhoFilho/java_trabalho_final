@@ -2,27 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.beibe.servlets.funcionario.Produtos;
+package com.beibe.servlets.categoria;
 
 import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOProduto;
+import com.beibe.database.DAO.DAOCategoria;
+import com.beibe.database.DAO.DAOChamado;
+import com.beibe.facade.CategoriaFacade;
 import com.beibe.model.Funcionario;
-import com.beibe.model.Produto;
-import jakarta.servlet.http.HttpSession;
+import com.beibe.utils.exceptions.categoriaExceptions.ListarCategoriasException;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.util.Date;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "EditarProduto", urlPatterns = {"/EditarProduto"})
-public class EditarProduto extends HttpServlet {
+@WebServlet(name = "ListaCategorias", urlPatterns = {"/ListaCategorias"})
+public class ListarCategorias extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,33 +37,15 @@ public class EditarProduto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession(false);
-            Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
 
-            if (funcionario != null) {
-                Integer id = Integer.parseInt(request.getParameter("id"));
-                String nome = request.getParameter("nome");
-                Integer saldo = Integer.parseInt(request.getParameter("saldo"));
-                Date validade = new Date();// new SimpleDateFormat("yyy/MM/dd").parse(request.getParameter("validade"));
-                Double preco = Double.parseDouble(request.getParameter("preco"));
-                //System.out.println("PRODUTO: " + id + " " + nome + " " + saldo + " " + preco " ");
-                DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
-                Produto produto = new Produto();
-                produto.setNome(nome);
-                produto.setValidade(validade);
-                produto.setPreco(preco);
-                produto.setSaldo(saldo);
-                System.out.println("SALDO: " + produto.getSaldo());
-                produto.setId(id);
-                dao.editar(produto);
-            }
-
-            response.sendRedirect("ListaProdutos");
-
-        } catch (Exception e) {
-            System.out.println(e);
+        try {                            
+            request.setAttribute("categorias", CategoriaFacade.listarCategorias() );
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/categorias.jsp");
+            rd.forward(request, response);
+            
+        } catch (ListarCategoriasException e) {
+            e.printStackTrace();
+            response.sendRedirect("erro.jsp");
         }
     }
 

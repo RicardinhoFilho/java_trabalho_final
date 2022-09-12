@@ -8,12 +8,14 @@ import com.beibe.database.ConnectionDAO;
 import com.beibe.database.IChamadoDAO;
 import com.beibe.model.Chamado;
 import com.beibe.model.Cliente;
+import com.beibe.utils.exceptions.DAOException;
 import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 /**
  *
@@ -28,7 +30,7 @@ public class DAOChamado implements IChamadoDAO {
     }
 
     @Override
-    public void novo(Chamado vo) {
+    public void criar(Chamado vo) throws DAOException{
 
         try {
             PreparedStatement st = conn.prepareStatement("insert into chamado (titulo,texto, cliente_id, finalizado)values(?,?,?,?)"
@@ -38,20 +40,12 @@ public class DAOChamado implements IChamadoDAO {
             st.setInt(3, vo.getCliente().getId());
             st.setBoolean(4, vo.getFinalizado());
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
-    @Override
-    public Chamado buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
-
-   
-            public List<Chamado> listaMeusChamados(Integer user_id) {
+    public List<Chamado> listaMeusChamados(Integer user_id) {
 
         List<Chamado> chamados = new ArrayList<Chamado>();
         try {
@@ -82,14 +76,15 @@ public class DAOChamado implements IChamadoDAO {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
 
         }
         return chamados;
 
     }
-    public List<Chamado> listaTodos() {
+
+    public List<Chamado> listarTodos() {
 
         List<Chamado> chamados = new ArrayList<Chamado>();
         try {
@@ -118,7 +113,7 @@ public class DAOChamado implements IChamadoDAO {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
 
         }
@@ -127,13 +122,19 @@ public class DAOChamado implements IChamadoDAO {
     }
 
     @Override
-    public void finaliza(Integer id) {
-  try {
+    public void excluir(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void atualizar(int id) throws DAOException{
+        try {
             PreparedStatement st = conn.prepareStatement("update chamado set finalizado = true where id = ?;");
             st.setInt(1, id);
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
-        }    }
+        } catch (SQLException  e) {
+            throw new DAOException(e);
+        }
+    }
 
 }

@@ -11,6 +11,5 @@ import com.beibe.model.Categoria;
  * @author User
  */
 public interface ICategoriaDAO extends IDAO<Categoria> {
-    
- 
+
 }

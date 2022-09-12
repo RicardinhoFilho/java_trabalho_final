@@ -5,20 +5,17 @@
 package com.beibe.servlets.chamados;
 
 import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOProduto;
 import com.beibe.database.DAO.DAOResposta;
 import com.beibe.model.Funcionario;
-import com.beibe.model.Produto;
 import com.beibe.model.Resposta;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
+
 
 /**
  *
@@ -54,7 +51,7 @@ public class CriarResposta extends HttpServlet {
 
             }
             System.out.println("ESSA É A RESPOSTA: " + resposta.getTexto());
-            dao.novo(resposta);
+            dao.criar(resposta);
 
             if (funcionario != null) {
                  response.sendRedirect("ListarChamados");

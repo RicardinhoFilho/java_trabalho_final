@@ -6,6 +6,7 @@ package com.beibe.database.DAO;
 
 import com.beibe.database.IFuncionarioDAO;
 import com.beibe.model.Funcionario;
+import com.beibe.utils.exceptions.DAOException;
 import java.util.List;
 
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class DAOFuncionario implements IFuncionarioDAO {
         this.conn = conn;
     }
 
-    public void novo(Funcionario vo) {
+    public void criar(Funcionario vo) {
 
         try {
             PreparedStatement st = conn.prepareStatement("Insert into FUNCIONARIO( nome, sobrenome, email, senha, admin) "
@@ -43,39 +44,33 @@ public class DAOFuncionario implements IFuncionarioDAO {
 
     }
 
-    public Funcionario buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
     public Funcionario buscaPorEmail(String email) {
-         Funcionario funcionario = new Funcionario();
-         System.out.println(email + " CHEGOU AQUI");
-        try{
-           
-              PreparedStatement st = conn.prepareStatement("select * from  FUNCIONARIO  where email = ?");
-           st.setString(1, email);
-           ResultSet rs = st.executeQuery();
-      System.out.println( rs);
-             while (rs.next()) {
-                 System.out.println( " CHEGOU AQUI no while");
-                   System.out.println(   rs.getString("nome"));
-              
+        Funcionario funcionario = new Funcionario();
+   
+        try {
+
+            PreparedStatement st = conn.prepareStatement("select * from FUNCIONARIO where email = ?");
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+
                 funcionario.setId(rs.getInt("id"));
                 funcionario.setNome(rs.getString("nome"));
                 funcionario.setSobrenome(rs.getString("sobrenome"));
                 funcionario.setEmail(rs.getString("email"));
                 funcionario.setSenha(rs.getString("senha"));
                 funcionario.setAdmin(rs.getBoolean("admin"));
-                
-             }
-             
-        }catch(Exception e){
+
+            }
+
+        } catch (Exception e) {
             System.out.println(e);
         }
         return funcionario;
     }
 
-    public List<Funcionario> listaTodos() {
+    public List<Funcionario> listarTodos() {
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
         try {
             Statement st = conn.createStatement();
@@ -97,6 +92,16 @@ public class DAOFuncionario implements IFuncionarioDAO {
             System.out.println(e);
         }
         return funcionarios;
+    }
+
+    @Override
+    public void atualizar(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void excluir(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

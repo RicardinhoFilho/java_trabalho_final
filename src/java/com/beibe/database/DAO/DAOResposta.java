@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.beibe.utils.SqlUtils;
+import com.beibe.utils.exceptions.DAOException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -29,7 +30,7 @@ public class DAOResposta implements IDAOResposta {
     }
 
     @Override
-    public void novo(Resposta vo) {
+    public void criar(Resposta vo) {
 
         try {
             PreparedStatement st = conn.prepareStatement("Insert into resposta( texto, chamado_id, funcionario_id) "
@@ -54,12 +55,7 @@ public class DAOResposta implements IDAOResposta {
     }
 
     @Override
-    public Resposta buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Resposta> listaTodos() {
+    public List<Resposta> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -100,6 +96,16 @@ public class DAOResposta implements IDAOResposta {
         }
 
         return respostas;
+    }
+
+    @Override
+    public void atualizar(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void excluir(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

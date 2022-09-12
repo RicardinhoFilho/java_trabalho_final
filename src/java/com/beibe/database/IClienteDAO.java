@@ -5,6 +5,7 @@
 package com.beibe.database;
 
 import com.beibe.model.Cliente;
+import com.beibe.utils.exceptions.DAOException;
 
 /**
  *
@@ -12,6 +13,6 @@ import com.beibe.model.Cliente;
  */
 public interface IClienteDAO extends IDAO{
     
-    Cliente buscaPorEmail(String email);
+    Cliente buscaPorEmail(String email) throws DAOException;
     
 }
