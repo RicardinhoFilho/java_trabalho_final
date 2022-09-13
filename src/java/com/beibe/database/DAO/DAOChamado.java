@@ -9,7 +9,6 @@ import com.beibe.database.IChamadoDAO;
 import com.beibe.model.Chamado;
 import com.beibe.model.Cliente;
 import com.beibe.utils.exceptions.DAOException;
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +44,7 @@ public class DAOChamado implements IChamadoDAO {
         }
     }
 
-    public List<Chamado> listaMeusChamados(Integer user_id) {
+    public List<Chamado> listaMeusChamados(Integer user_id) throws DAOException {
 
         List<Chamado> chamados = new ArrayList<Chamado>();
         try {
@@ -76,15 +75,15 @@ public class DAOChamado implements IChamadoDAO {
 
             }
 
-        } catch (SQLException e) {
-            System.out.println(e);
-
+        } catch (SQLException  e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
         return chamados;
 
     }
 
-    public List<Chamado> listarTodos() {
+    public List<Chamado> listarTodos() throws DAOException {
 
         List<Chamado> chamados = new ArrayList<Chamado>();
         try {
@@ -113,9 +112,9 @@ public class DAOChamado implements IChamadoDAO {
 
             }
 
-        } catch (SQLException e) {
-            System.out.println(e);
-
+        } catch (SQLException  e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
         return chamados;
 
@@ -133,6 +132,7 @@ public class DAOChamado implements IChamadoDAO {
             st.setInt(1, id);
             st.execute();
         } catch (SQLException  e) {
+            e.printStackTrace();
             throw new DAOException(e);
         }
     }

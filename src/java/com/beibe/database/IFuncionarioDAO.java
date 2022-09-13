@@ -5,6 +5,7 @@
 package com.beibe.database;
 
 import com.beibe.model.Funcionario;
+import com.beibe.utils.exceptions.DAOException;
 
 /**
  *
@@ -12,6 +13,6 @@ import com.beibe.model.Funcionario;
  */
 public interface IFuncionarioDAO extends IDAO<Funcionario> {
 
-    Funcionario buscaPorEmail(String email);
+    Funcionario buscaPorEmail(String email) throws DAOException;
 
 }

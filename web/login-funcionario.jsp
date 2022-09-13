@@ -34,45 +34,45 @@
                                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                                             <div class="col-lg-6">
                                                 <div class="p-5">
-                                <!-- Basic login form-->
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header justify-content-center"><h3 class="fw-light my-4">Bem vindo novamente!</h3></div>
-                                    <div class="card-body">
-                                        <!-- Login form-->
-                                        <form method = "post"  action = "LoginFuncionario">
-                                            <!-- Form Group (email address)-->
-                                            <div class="mb-3">
-                                                <label class="small mb-1" for="inputEmailAddress"  >Email</label>
-                                                <input class="form-control" id="inputEmailAddress" name="email" type="email" placeholder="Digite seu e-mail" />
-                                            </div>
-                                            <!-- Form Group (password)-->
-                                            <div class="mb-3">
-                                                <label class="small mb-1" for="inputPassword">Senha</label>
-                                                <input class="form-control" id="inputPassword" name="senha" type="password" placeholder="Digite sua senha" />
-                                            </div>
-                                            <!-- Form Group (remember password checkbox)-->
-                                            <div class="mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value="" />
-                                                    <label class="form-check-label" for="rememberPasswordCheck">Lembre-me</label>
+                                                    <!-- Basic login form-->
+                                                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                                        <div class="card-header justify-content-center"><h3 class="fw-light my-4">Bem vindo novamente!</h3></div>
+                                                        <div class="card-body">
+                                                            <!-- Login form-->
+                                                            <form method = "post"  action = "LoginFuncionario">
+                                                                <!-- Form Group (email address)-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputEmailAddress"  >Email</label>
+                                                                    <input class="form-control" id="inputEmailAddress" name="email" type="email" placeholder="Digite seu e-mail" />
+                                                                </div>
+                                                                <!-- Form Group (password)-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputPassword">Senha</label>
+                                                                    <input class="form-control" id="inputPassword" name="senha" type="password" placeholder="Digite sua senha" />
+                                                                </div>
+                                                                <!-- Form Group (remember password checkbox)-->
+                                                                <div class="mb-3">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value="" />
+                                                                        <label class="form-check-label" for="rememberPasswordCheck">Lembre-me</label>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Form Group (login box)-->
+                                                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                                    <a class="small" href="redefinirSenha.html">Esqueceu sua senha?</a>
+                                                                    <button class="btn btn-primary" type="submit" >Entrar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            <div class="small"><a href="cadastroSimples.html">Criar uma conta</a></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <!-- Form Group (login box)-->
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="redefinirSenha.html">Esqueceu sua senha?</a>
-                                                <button class="btn btn-primary" type="submit" >Entrar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small"><a href="cadastroSimples.html">Criar uma conta</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

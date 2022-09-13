@@ -6,7 +6,6 @@ package com.beibe.database.DAO;
 
 import com.beibe.database.IClienteDAO;
 import com.beibe.model.Cliente;
-import com.beibe.model.Funcionario;
 import com.beibe.utils.exceptions.DAOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

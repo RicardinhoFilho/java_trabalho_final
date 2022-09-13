@@ -4,9 +4,9 @@
  */
 package com.beibe.servlets.chamados;
 
-import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOChamado;
+import com.beibe.facade.ChamadoFacade;
 import com.beibe.model.Cliente;
+import com.beibe.utils.exceptions.chamadosExceptions.ListarChamadosException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
@@ -35,30 +35,27 @@ public class MeusChamados extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          try {
-           
-              HttpSession session = request.getSession(false);
-              
-              if(session!=null){
-                  Cliente cliente = (Cliente) session.getAttribute("cliente");
-                  if(cliente != null){
-                          DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
-                          
-             
-                         request.setAttribute("chamados", dao.listaMeusChamados(cliente.getId()));
-                   
-                              RequestDispatcher rd = getServletContext().getRequestDispatcher("/chamados.jsp");
-            rd.forward(request, response);
-                      
-                  }
-              }
+        try {
 
-          
-                response.sendRedirect("login-cliente.jsp");
+            HttpSession session = request.getSession(false);
 
-        } catch (Exception e) {
+            if (session != null) {
+                Cliente cliente = (Cliente) session.getAttribute("cliente");
+                if (cliente != null) {
+
+                    request.setAttribute("chamados", ChamadoFacade.listarChamadosPorIdCliente(cliente.getId()));
+
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/chamados.jsp");
+                    rd.forward(request, response);
+
+                }
+            }
+
+            response.sendRedirect("login-cliente.jsp");
+
+        } catch (ListarChamadosException e) {
             System.out.println(e);
-             response.sendRedirect("login-cliente.jsp");
+            response.sendRedirect("login-cliente.jsp");
         }
     }
 

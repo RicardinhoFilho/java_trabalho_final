@@ -12,6 +12,7 @@ import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 
@@ -27,7 +28,7 @@ public class DAOFuncionario implements IFuncionarioDAO {
         this.conn = conn;
     }
 
-    public void criar(Funcionario vo) {
+    public void criar(Funcionario vo) throws DAOException {
 
         try {
             PreparedStatement st = conn.prepareStatement("Insert into FUNCIONARIO( nome, sobrenome, email, senha, admin) "
@@ -38,15 +39,16 @@ public class DAOFuncionario implements IFuncionarioDAO {
             st.setString(3, vo.getSenha());
             st.setBoolean(3, vo.isAdmin());
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
 
     }
 
-    public Funcionario buscaPorEmail(String email) {
+    public Funcionario buscaPorEmail(String email) throws DAOException{
         Funcionario funcionario = new Funcionario();
-   
+
         try {
 
             PreparedStatement st = conn.prepareStatement("select * from FUNCIONARIO where email = ?");
@@ -64,13 +66,14 @@ public class DAOFuncionario implements IFuncionarioDAO {
 
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
         return funcionario;
     }
 
-    public List<Funcionario> listarTodos() {
+    public List<Funcionario> listarTodos() throws DAOException{
         List<Funcionario> funcionarios = new ArrayList<Funcionario>();
         try {
             Statement st = conn.createStatement();
@@ -88,8 +91,9 @@ public class DAOFuncionario implements IFuncionarioDAO {
 
                 funcionarios.add(funcionario);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
         return funcionarios;
     }
