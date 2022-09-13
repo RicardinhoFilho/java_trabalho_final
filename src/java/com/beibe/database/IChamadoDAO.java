@@ -5,6 +5,7 @@
 package com.beibe.database;
 
 import com.beibe.model.Chamado;
+import com.beibe.utils.exceptions.DAOException;
 
 /**
  *
@@ -12,6 +13,5 @@ import com.beibe.model.Chamado;
  */
 public interface IChamadoDAO extends IDAO<Chamado> {
     
-    public void finaliza(Integer id);
     
 }

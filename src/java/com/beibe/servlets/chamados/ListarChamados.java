@@ -8,8 +8,10 @@ import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOChamado;
 import com.beibe.database.DAO.DAOFuncionario;
 import com.beibe.database.DAO.DAOResposta;
+import com.beibe.facade.ChamadoFacade;
 import com.beibe.model.Chamado;
 import com.beibe.model.Funcionario;
+import com.beibe.utils.exceptions.chamadosExceptions.ListarChamadosException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
@@ -40,30 +42,26 @@ public class ListarChamados extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       try {
-           
-              HttpSession session = request.getSession(false);
-              
-              if(session!=null){
-                  Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
-                  if(funcionario != null){
-                          DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
-                          
-             
-                         request.setAttribute("chamados", dao.listaTodos());
-                   
-                              RequestDispatcher rd = getServletContext().getRequestDispatcher("/chamados.jsp");
-            rd.forward(request, response);
-                      
-                  }
-              }
+        try {
 
-          
-               
+            HttpSession session = request.getSession(false);
 
-        } catch (Exception e) {
+            if (session != null) {
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
+                if (funcionario != null) {
+                    
+
+                    request.setAttribute("chamados", ChamadoFacade.listarChamados());
+
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/chamados.jsp");
+                    rd.forward(request, response);
+
+                }
+            }
+
+        } catch (ListarChamadosException e) {
             System.out.println(e);
-             response.sendRedirect("login-funcionario.jsp");
+            response.sendRedirect("login-funcionario.jsp");
         }
     }
 

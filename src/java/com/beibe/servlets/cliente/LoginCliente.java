@@ -6,12 +6,11 @@ package com.beibe.servlets.cliente;
 
 import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOCliente;
-import com.beibe.database.DAO.DAOFuncionario;
+import com.beibe.facade.ClienteFacade;
 import com.beibe.model.Cliente;
-import com.beibe.model.Funcionario;
+import com.beibe.utils.exceptions.clienteExceptions.BuscarClienteException;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,20 +39,18 @@ public class LoginCliente extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         Cliente cliente = null;
-         System.out.println(email + " "+ email);
+         
         try {
-
-            DAOCliente dao = new DAOCliente(new ConnectionDAO().conectaDB());
-            cliente = dao.buscaPorEmail(email);
+            
+            cliente = ClienteFacade.buscaPorEmail(email);
              
             if (cliente.getId() != null) {
-                System.out.println(cliente.getSenha() + "==" + senha);
                 if (senha.equals(cliente.getSenha())) {
                     
-                    System.out.println("SENHAS IGUAIS");
                     HttpSession session = request.getSession(true);
                     session.setAttribute("cliente", cliente);
                     response.sendRedirect("index.jsp");
+                    
                 } else {
 
                     request.setAttribute("msg", "Dados de Login inválidos!");
@@ -64,7 +61,7 @@ public class LoginCliente extends HttpServlet {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (BuscarClienteException e) {
             request.setAttribute("msg", "Não foi possível efetuar o login!");
 
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-cliente.jsp");

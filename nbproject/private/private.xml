@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/User/Desktop/java-web/beibe/web/login-funcionario.jsp</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/IChamadoDAO.java</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/web/chamados.jsp</file>
@@ -49,6 +50,23 @@
             <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/DAO/DAOProduto.java</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/database/ConnectionDAO.java</file>
             <file>file:/C:/Users/User/Desktop/java-web/beibe/src/java/com/beibe/model/Produto.java</file>
+=======
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/web/login-cliente.jsp</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/nbproject/build-impl.xml</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/database/DAO/DAOCliente.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/database/DAO/DAOCategoria.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/facade/CategoriaFacade.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/database/DAO/DAOResposta.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/servlets/funcionario/LoginFuncionario.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/web/login-funcionario.jsp</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/servlets/categoria/CriarCategoria.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/servlets/categoria/ListarCategorias.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/servlets/categoria/ExcluirCategoria.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/database/newSQLTemplate.sql</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/database/DAO/DAOFuncionario.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/servlets/categoria/AtualizarCategoria.java</file>
+            <file>file:/D:/Dev/TADS/WEBII/projetos/java_trabalho_final/src/java/com/beibe/database/ConnectionDAO.java</file>
+>>>>>>> 796f93551e7779741453637993df5c925bc5c02f
         </group>
     </open-files>
 </project-private>

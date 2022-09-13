@@ -4,21 +4,17 @@
  */
 package com.beibe.servlets.chamados;
 
-import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOProduto;
-import com.beibe.database.DAO.DAOResposta;
+import com.beibe.facade.ChamadoFacade;
 import com.beibe.model.Funcionario;
-import com.beibe.model.Produto;
 import com.beibe.model.Resposta;
+import com.beibe.utils.exceptions.chamadosExceptions.CriarRespostaException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
 
 /**
  *
@@ -41,8 +37,6 @@ public class CriarResposta extends HttpServlet {
         try {
             String texto = request.getParameter("texto");
             Integer id = Integer.parseInt(request.getParameter("id"));
-            
-            DAOResposta dao = new DAOResposta(new ConnectionDAO().conectaDB());
 
             HttpSession session = request.getSession(false);
             Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
@@ -51,19 +45,17 @@ public class CriarResposta extends HttpServlet {
             resposta.setTexto(texto);
             if (funcionario != null) {
                 resposta.setFuncionario(funcionario);
-
             }
             System.out.println("ESSA É A RESPOSTA: " + resposta.getTexto());
-            dao.novo(resposta);
+            ChamadoFacade.criarResposta(resposta);
 
             if (funcionario != null) {
-                 response.sendRedirect("ListarChamados");
-              
+                response.sendRedirect("ListarChamados");
 
             }
-             response.sendRedirect("MeusChamados");
+            response.sendRedirect("MeusChamados");
 
-        } catch (Exception e) {
+        } catch (CriarRespostaException e) {
             System.out.println(e);
         }
     }

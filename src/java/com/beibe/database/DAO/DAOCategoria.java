@@ -4,16 +4,16 @@
  */
 package com.beibe.database.DAO;
 
-import com.beibe.database.ConnectionDAO;
+
 import com.beibe.database.ICategoriaDAO;
 import com.beibe.model.Categoria;
-import com.beibe.model.Chamado;
-import com.beibe.model.Cliente;
+import com.beibe.utils.exceptions.DAOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 /**
  *
@@ -28,50 +28,48 @@ public class DAOCategoria implements ICategoriaDAO {
     }
 
     @Override
-    public void novo(Categoria vo) {
+    public void criar(Categoria vo) throws DAOException {
         try {
             PreparedStatement st = conn.prepareStatement("insert into categorias (nome)values(?);");
 
             st.setString(1, vo.getNome());
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
     }
-    
-     
-    public void editar(Categoria vo) {
+
+    public void editar(Categoria vo) throws DAOException {
         try {
             PreparedStatement st = conn.prepareStatement("update  categorias set nome = ? where id = ? ;");
 
             st.setString(1, vo.getNome());
-             st.setInt(2, vo.getId());
+            st.setInt(2, vo.getId());
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
     }
 
 
-    @Override
-    public Categoria buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    public void excluir(int id) {
+    public void excluir(int id) throws DAOException {
         try {
             PreparedStatement st = conn.prepareStatement("delete from categorias where id = ?;");
 
             st.setInt(1, id);
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
-        
+
     }
 
     @Override
-    public List<Categoria> listaTodos() {
+    public List<Categoria> listarTodos() throws DAOException {
         List<Categoria> categorias = new ArrayList<Categoria>();
         try {
 
@@ -88,12 +86,17 @@ public class DAOCategoria implements ICategoriaDAO {
 
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
-
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
         return categorias;
 
+    }
+
+    @Override
+    public void atualizar(int id) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

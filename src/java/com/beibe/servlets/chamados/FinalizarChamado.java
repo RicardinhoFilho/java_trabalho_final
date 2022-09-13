@@ -7,8 +7,10 @@ package com.beibe.servlets.chamados;
 import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOChamado;
 import com.beibe.database.DAO.DAOResposta;
+import com.beibe.facade.ChamadoFacade;
 import com.beibe.model.Funcionario;
 import com.beibe.model.Resposta;
+import com.beibe.utils.exceptions.chamadosExceptions.AtualizarChamadoException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -38,25 +40,25 @@ public class FinalizarChamado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            
+
             Integer id = Integer.parseInt(request.getParameter("id"));
 
-            DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
+            
 
             HttpSession session = request.getSession(false);
             Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
-            
+
             if (funcionario != null) {
-               
-                dao.finaliza(id);
+
+                ChamadoFacade.finalizarChamado(id);
             }
-            
 
             response.sendRedirect("ListarChamados");
 
-        } catch (Exception e) {
-                    response.sendRedirect("index.jsp");
-            System.out.println(e);
+        } catch (AtualizarChamadoException e) {
+            e.printStackTrace();
+            response.sendRedirect("index.jsp");
+            return;
         }
     }
 

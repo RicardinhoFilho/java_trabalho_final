@@ -6,7 +6,9 @@ package com.beibe.servlets.funcionario;
 
 import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOFuncionario;
+import com.beibe.facade.FuncionarioFacade;
 import com.beibe.model.Funcionario;
+import com.beibe.utils.exceptions.funcionarioExceptions.BuscarFuncionarioException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,18 +40,13 @@ public class LoginFuncionario extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         Funcionario funcionario = null;
-         System.out.println(email + " "+ email);
+
         try {
 
-            DAOFuncionario dao = new DAOFuncionario(new ConnectionDAO().conectaDB());
-            funcionario = dao.buscaPorEmail(email);
-             System.out.println("funcionario.getNome()");
-            System.out.println(funcionario.getNome());
+            funcionario = FuncionarioFacade.buscaPorEmail(email);
+            
             if (funcionario.getId() != null) {
-                System.out.println(funcionario.getSenha() + "==" + senha);
                 if (senha.equals(funcionario.getSenha())) {
-                    
-                    System.out.println("SENHAS IGUAIS");
                     HttpSession session = request.getSession(true);
                     session.setAttribute("funcionario", funcionario);
                     response.sendRedirect("index.jsp");
@@ -58,19 +55,19 @@ public class LoginFuncionario extends HttpServlet {
                     request.setAttribute("msg", "Dados de Login inválidos!");
 
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-funcionario.jsp");
-                          rd.forward(request, response);
-                          return;
+                    rd.forward(request, response);
+                    return;
                 }
             }
 
-        } catch (Exception e) {
+        } catch (BuscarFuncionarioException e) {
             request.setAttribute("msg", "Não foi possível efetuar o login!");
-
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-funcionario.jsp");
             rd.forward(request, response);
+            
             return;
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

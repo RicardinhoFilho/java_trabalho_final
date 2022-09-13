@@ -4,17 +4,21 @@
  */
 package com.beibe.database;
 
+import com.beibe.utils.exceptions.DAOException;
+import java.util.List;
+
 /**
  *
  * @author User
  */
 public interface IDAO<T> {
-      public void novo(T vo);
 
-
-    public T buscar(int id);
-
-    public java.util.List<T> listaTodos();
+    public void criar(T vo) throws DAOException;
     
+    public void atualizar(int id) throws DAOException;
     
+    public void excluir(int id) throws DAOException;
+
+    public List<T> listarTodos() throws DAOException;
+
 }
