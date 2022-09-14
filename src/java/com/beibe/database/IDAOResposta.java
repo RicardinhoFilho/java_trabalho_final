@@ -5,6 +5,7 @@
 package com.beibe.database;
 
 import com.beibe.model.Resposta;
+import com.beibe.utils.exceptions.DAOException;
 import java.util.List;
 
 /**
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface IDAOResposta extends IDAO<Resposta> {
     
-    List<Resposta> listaTodosPorChamado(Integer id);
+    List<Resposta> listaTodosPorChamado(Integer id) throws DAOException;
 }
