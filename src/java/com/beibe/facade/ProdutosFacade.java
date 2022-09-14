@@ -4,12 +4,24 @@
  */
 package com.beibe.facade;
 
+import com.beibe.database.ConnectionDAO;
+import com.beibe.model.Produto;
+import com.beibe.database.DAO.DAOProduto;
+import com.beibe.utils.exceptions.DAOException;
+import java.util.List;
+
 /**
  *
  * @author eduar
  */
 public class ProdutosFacade {
     
-    
+    public List<Produto> listarProdutos() throws DAOException{
+         DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
+
+            
+            return dao.listarTodos();
+    }
+   
     
 }

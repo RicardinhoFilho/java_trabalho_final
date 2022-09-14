@@ -178,7 +178,7 @@
                                             <tr>
                                                 <td><c:out value="${item.nome}" /></td>
 
-                                                <td> <td><c:out value="${item.created_at}" /></td></td>
+                                                 <td><c:out value="${item.created_at}" /></td>
                                                 <td>
                                                     <button class="btn btn-datatable btn-icon btn-transparent-dark me-2" type="button" data-bs-toggle="modal" data-bs-target="#editGroupModal<c:out value="${item.id}"/>">EDITAR</button>
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" href="ExcluirCategoria?id=<c:out value="${item.id}"/>">EXCLUIR</a>

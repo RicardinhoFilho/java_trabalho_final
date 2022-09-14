@@ -123,7 +123,16 @@
                 <!-- Styled timeline component-->
                 <div id="timelineStyled">
                     <div class="card mb-4">
-                        <div class="card-header">Novos chamados</div>
+                        <c:choose>
+                            <c:when test="${sessionScope.cliente != null}">
+                                <a class="text-warning" href="HelperNovoChamado">
+
+                                    <div class="card-header"> Criar Chamado</div></a>                            </c:when>
+                                <c:otherwise>
+                                <div class="card-header">Novos chamados</div>
+                            </c:otherwise>
+                        </c:choose>
+
                         <div class="card-body">
                             <!-- Component Preview-->
                             <div class="sbp-preview">
@@ -146,7 +155,7 @@
                                                     <div class="card shadow-sm">
                                                         <div class="card-body">
                                                             <c:choose>
-                                                                <c:when test="${item.finalizado == false}">
+                                                                <c:when test="${item.finalizado == null}">
                                                                     <h5 ><a class="text-warning" href="alerts.html" data-bs-toggle="modal" data-bs-target="#teste<c:out value="${item.id}" />"><c:out value="${item.cliente.nome}" /> - <c:out value="${item.titulo}" /> - Chamado #<c:out value="${item.id}" /></a></h5>
 
                                                                 </c:when>
@@ -172,7 +181,7 @@
                                                                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <c:choose>
-                                                                    <c:when test="${item.repostas.size()> 0}">
+                                                                    <c:when test="${item.repostas.size()>= 0}">
                                                                         <div class="card-body">
                                                                             <div class="timeline timeline-xs">
                                                                                 <div class="timeline-item">
@@ -237,7 +246,7 @@
 
                                                                         </c:forEach>
                                                                         <c:choose>
-                                                                            <c:when test="${item.finalizado == true}">
+                                                                            <c:when test="${item.finalizado != null}">
 
                                                                             </c:when>
                                                                             <c:otherwise>
@@ -260,87 +269,7 @@
                                                         </div>    </div>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <div class="modal fade" id="teste<c:out value="${item.id}" />" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
-                                                        <div class="modal-dialog modal-xl" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="mb-4">
-                                                                    <!-- Dashboard activity timeline example-->
-                                                                    <div class="card card-header-actions">
-                                                                        <div class="card-header">
-                                                                            <c:out value="${item.cliente.nome}" />  -  <c:out value="${item.titulo}" />  - Chamado #<c:out value="${item.id}" />"
-                                                                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-
-                                                                        <div class="card-body">
-                                                                            <div class="timeline timeline-xs">
-                                                                                <!-- Timeline Item 1-->
-                                                                                <div class="timeline-item">
-                                                                                    <div class="timeline-item-marker">
-                                                                                        <div class="timeline-item-marker-text"><c:out value="${item2.criacao}"/></div>
-
-                                                                                        <div class="timeline-item-marker-indicator bg-purple"></div>
-
-                                                                                    </div>
-                                                                                    <div class="timeline-item-content">
-                                                                                        <c:out value="${item.cliente.nome}"/> -  <c:out value="${item.texto}"/>
-                                                                                    </div>
-                                                                                </div>
-
-
-
-
-
-
-
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="card-header">
-                                                                            Interagir no chamado
-                                                                        </div>
-                                                                        <form action="CriarResposta?id=<c:out value="${item.id}"/>" method = "post" >
-                                                                            <div class="card-body"><textarea  name="texto" class="lh-base form-control" type="text" placeholder="Escreva..." rows="2"></textarea></div>
-                                                                            <div class="d-grid"></div>
-                                                                            <div class="modal-footer">
-                                                                                <a class="btn btn-danger"  href="FinalizarChamado?id=<c:out value="${item.id}"/>">Finalizar chamado</a>                                                                                <button class="fw-100 btn btn-primary" type="submit">Enviar interação</button>
-                                                                                <button class="fw-100 btn btn-primary" type="submit">Enviar interação</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                                                            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
-                                                                <h6 class="dropdown-header dropdown-notifications-header">
-                                                                    <i class="me-2" data-feather="bell"></i>
-                                                                    Alertas
-                                                                </h6>
-                                                                <!-- Example Alert 1-->
-                                                                <a class="dropdown-item dropdown-notifications-item" href="alerts.html" data-bs-toggle="modal" data-bs-target="#teste<c:out value="${item.id}" />">
-                                                                    <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
-                                                                    <div class="dropdown-notifications-item-content">
-                                                                        <div class="dropdown-notifications-item-content-details">29 dez 2021</div>
-                                                                        <div class="dropdown-notifications-item-content-text">Nova interação de Pedro - Estorno </div>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- Example Alert 2-->
-                                                                <a class="dropdown-item dropdown-notifications-item" href="#!">
-                                                                    <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
-                                                                    <div class="dropdown-notifications-item-content">
-                                                                        <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
-                                                                        <div class="dropdown-notifications-item-content-text">Novo chamado de Roberta</div>
-                                                                    </div>
-                                                                </a>
-                                                                <a class="dropdown-item dropdown-notifications-footer" href="#!">Ver todos os alertas</a>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                </div>    
+                                                        <div></div>
                                             </c:otherwise>
                                         </c:choose>
 
@@ -348,6 +277,9 @@
 
 
                                     </c:forEach>
+
+
+
 
 
 

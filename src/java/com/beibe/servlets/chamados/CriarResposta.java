@@ -51,7 +51,7 @@ public class CriarResposta extends HttpServlet {
 
             if (funcionario != null) {
                 response.sendRedirect("ListarChamados");
-
+                return;
             }
             response.sendRedirect("MeusChamados");
 

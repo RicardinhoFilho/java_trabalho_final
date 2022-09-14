@@ -4,18 +4,15 @@
  */
 package com.beibe.servlets.chamados;
 
-import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOChamado;
-import com.beibe.database.DAO.DAOResposta;
 import com.beibe.facade.ChamadoFacade;
-import com.beibe.model.Funcionario;
-import com.beibe.model.Resposta;
-import com.beibe.utils.exceptions.chamadosExceptions.AtualizarChamadoException;
+import com.beibe.model.Cliente;
+import com.beibe.model.Chamado;
+import com.beibe.model.Produto;
+import com.beibe.utils.exceptions.chamadosExceptions.CriarChamadoException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,8 +21,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "FinalizarChamado", urlPatterns = {"/FinalizarChamado"})
-public class FinalizarChamado extends HttpServlet {
+@WebServlet(name = "CriarChamado", urlPatterns = {"/CriarChamado"})
+public class CriarChamado extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,25 +37,30 @@ public class FinalizarChamado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-
-            Integer id = Integer.parseInt(request.getParameter("id"));
-
-            
+            String texto = request.getParameter("texto");
+            String titulo = request.getParameter("titulo");
+            Integer produto_id = Integer.parseInt(request.getParameter("produto_id"));
 
             HttpSession session = request.getSession(false);
-            Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
+            Cliente cliente = (Cliente) session.getAttribute("cliente");
+            Chamado chamado = new Chamado();
+            Produto produto = new Produto();
 
-            if (funcionario != null) {
-
-                ChamadoFacade.finalizarChamado(id);
+            chamado.setTexto(texto);
+            chamado.setTitulo(titulo);
+            produto.setId(produto_id);
+            chamado.setProduto(produto);
+            if (cliente != null) {
+                 System.out.println("ESSE É O PRODUTO: " + chamado.getProduto().getId());
+                chamado.setCliente(cliente);
+                ChamadoFacade.criarChamado(chamado);
             }
+            System.out.println("ESSA É A RESPOSTA: " + chamado.getTexto());
 
-            response.sendRedirect("ListarChamados");
+            response.sendRedirect("MeusChamados");
 
-        } catch (AtualizarChamadoException e) {
-            e.printStackTrace(); 
-            response.sendRedirect("index.jsp"); 
-            return;
+        } catch (CriarChamadoException ex) {
+            System.out.println(ex);
         }
     }
 

@@ -32,12 +32,12 @@ public class DAOChamado implements IChamadoDAO {
     public void criar(Chamado vo) throws DAOException{
 
         try {
-            PreparedStatement st = conn.prepareStatement("insert into chamado (titulo,texto, cliente_id, finalizado)values(?,?,?,?)"
-                    + "values(?, ?, ?,?,?)");
+            PreparedStatement st = conn.prepareStatement("insert into chamado (titulo,texto, cliente_id, produto_id)values(?,?,?,?)");
             st.setString(1, vo.getTitulo());
             st.setString(2, vo.getTexto());
             st.setInt(3, vo.getCliente().getId());
-            st.setBoolean(4, vo.getFinalizado());
+            st.setInt(4, vo.getProduto().getId());
+            
             st.execute();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -59,7 +59,7 @@ public class DAOChamado implements IChamadoDAO {
                 chamado.setId(rs.getInt("id"));
                 chamado.setTitulo(rs.getString("titulo"));
                 chamado.setTexto(rs.getString("texto"));
-                chamado.setFinalizado(rs.getBoolean("finalizado"));
+                chamado.setFinalizado(rs.getDate("finalizado"));
                 chamado.setCriacao(rs.getDate("criacao"));
                 cliente.setId(rs.getInt("cliente_id"));
                 cliente.setNome(rs.getString("nome"));
@@ -96,7 +96,7 @@ public class DAOChamado implements IChamadoDAO {
                 chamado.setId(rs.getInt("id"));
                 chamado.setTitulo(rs.getString("titulo"));
                 chamado.setTexto(rs.getString("texto"));
-                chamado.setFinalizado(rs.getBoolean("finalizado"));
+                chamado.setFinalizado(rs.getDate("finalizado"));
                 chamado.setCriacao(rs.getDate("criacao"));
                 cliente.setId(rs.getInt("cliente_id"));
                 cliente.setNome(rs.getString("nome"));
@@ -128,7 +128,7 @@ public class DAOChamado implements IChamadoDAO {
     @Override
     public void atualizar(int id) throws DAOException{
         try {
-            PreparedStatement st = conn.prepareStatement("update chamado set finalizado = true where id = ?;");
+            PreparedStatement st = conn.prepareStatement("update chamado set finalizado = CURRENT_TIMESTAMP where id = ?;");
             st.setInt(1, id);
             st.execute();
         } catch (SQLException  e) {

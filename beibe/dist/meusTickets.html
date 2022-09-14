@@ -165,7 +165,10 @@
                 <!-- Styled timeline component-->
                 <div id="timelineStyled">
                     <div class="card mb-4">
-                        <div class="card-header">Novos chamados</div>
+                        <a class="text-warning" href="alerts.html" data-bs-toggle="modal" data-bs-target="#form-novo"><div class="card-header">Novos chamados</div></a>
+                      
+
+
                         <div class="card-body">
                             <!-- Component Preview-->
                             <div class="sbp-preview">
@@ -218,7 +221,56 @@
         </div>
 
 
-
+        <a class="text-warning" href="alerts.html" data-bs-toggle="modal" data-bs-target="#form-novo"><div class="card-header">Novos chamados</div></a>
+        <div class="modal fade" id="form-novo" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+            
+            
+            <div class="modal-dialog modal-xl" role="document">
+        <div class="container-xl px-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <!-- Basic registration form-->
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header justify-content-center"><h3 class="fw-light my-4">Cadastrar-se</h3></div>
+                        <div class="card-body">
+                            <!-- Registration form-->
+                            <form>
+                                <!-- Form Row-->
+                                <div class="row gx-3">
+                                    <div class="col-md-6">
+                                        <!-- Form Group (first name)-->
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="titulo">Titulo</label>
+                                            <input class="form-control" id="titulo" type="text" placeholder="Digite o titulo" />
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <!-- Form Group (email address)            -->
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="texto">Reclamação</label>
+                                    <input class="form-control" id="texto" type="text" aria-describedby="emailHelp" placeholder="Digite seu email" />
+                                </div>
+                                <!-- Form Row    -->
+                                <div class="row gx-3">
+                                    <div class="col-md-6">
+                                        <!-- Form Group (password)-->
+                                        <div class="mb-3">
+                                            <label class="small mb-1" for="inputPassword">Produto</label>
+                                            <input class="form-control" id="inputPassword" type="checkbox" placeholder="Digite sua senha" />
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <!-- Form Group (create account submit)-->
+                            </form>
+                        </div>
+                    </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 
                                 <!-- MODAL -->
                                 <div class="modal fade" id="exampleModalXl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
@@ -321,6 +373,66 @@
                                     </div>
                             </div>
                         </div>
+
+                        <div class="modal fade" id="form-novo" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="container-xl px-4">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-7">
+                                            <!-- Basic registration form-->
+                                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                                <div class="card-header justify-content-center"><h3 class="fw-light my-4">Cadastrar-se</h3></div>
+                                                <div class="card-body">
+                                                    <!-- Registration form-->
+                                                    <form>
+                                                        <!-- Form Row-->
+                                                        <div class="row gx-3">
+                                                            <div class="col-md-6">
+                                                                <!-- Form Group (first name)-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputFirstName">Nome</label>
+                                                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Digite seu nome" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <!-- Form Group (last name)-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputLastName">Sobrenome</label>
+                                                                    <input class="form-control" id="inputLastName" type="text" placeholder="Digite seu sobrenome" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Form Group (email address)            -->
+                                                        <div class="mb-3">
+                                                            <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                                            <input class="form-control" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Digite seu email" />
+                                                        </div>
+                                                        <!-- Form Row    -->
+                                                        <div class="row gx-3">
+                                                            <div class="col-md-6">
+                                                                <!-- Form Group (password)-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputPassword">Senha</label>
+                                                                    <input class="form-control" id="inputPassword" type="password" placeholder="Digite sua senha" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <!-- Form Group (confirm password)-->
+                                                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputConfirmPassword">Confirmar senha</label>
+                                                                    <input class="form-control" id="inputConfirmPassword" type="password" placeholder="Repita sua senha" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Form Group (create account submit)-->
+                                                        <a class="btn btn-primary btn-block" href="login.html">Cadastrar-se</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
     </body>

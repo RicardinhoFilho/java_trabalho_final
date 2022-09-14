@@ -17,9 +17,10 @@ public class Chamado {
     Integer id;
     String titulo;
     String texto;
-    Boolean finalizado;
+    Date finalizado;
     Cliente cliente;
     List<Resposta> repostas = new ArrayList<Resposta>();
+    Produto produto;
     Date criacao;
 
     public Chamado() {
@@ -44,16 +45,25 @@ public class Chamado {
     public String getTexto() {
         return texto;
     }
+    
+    public Produto getProduto(){
+        return produto;
+    }
+    
+    public void setProduto(Produto produto){
+      this.produto = produto;
+    }
+
 
     public void setTexto(String texto) {
         this.texto = texto;
     }
 
-    public Boolean getFinalizado() {
+    public Date getFinalizado() {
         return finalizado;
     }
 
-    public void setFinalizado(Boolean finalizado) {
+    public void setFinalizado(Date finalizado) {
         this.finalizado = finalizado;
     }
 

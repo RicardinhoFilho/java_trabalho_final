@@ -46,6 +46,7 @@ public class CriarCategoria extends HttpServlet {
 
                 CategoriaFacade.criarCategoria(nome);
                 response.sendRedirect("ListaCategorias");
+                return;
             }
             response.sendRedirect("login-funcionario.jsp");
 

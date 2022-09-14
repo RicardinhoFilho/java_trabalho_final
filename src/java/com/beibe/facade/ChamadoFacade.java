@@ -22,18 +22,17 @@ import java.util.List;
  * @author eduar
  */
 public class ChamadoFacade {
-    
-    public static void criarChamado(String nome) throws CriarChamadoException {
-        /* TO DO
+
+    public static void criarChamado(Chamado chamado) throws CriarChamadoException {
+
         try {
             DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
-            Chamado chamado = new Chamado();
-            chamado.setNome(nome);
+
             dao.criar(chamado);
 
         } catch (DAOException e) {
-            throw new CriarChamadoException("Erro ao criar categoria " + nome, e);
-        }*/
+            throw new CriarChamadoException("Erro ao criar categoria " + chamado.getTitulo(), e);
+        }
 
     }
 
@@ -46,7 +45,7 @@ public class ChamadoFacade {
             throw new ExcluirChamadoException("Erro ao excluir categoria id =" + id, e);
         }
     }
-    
+
     public static void finalizarChamado(Integer id) throws AtualizarChamadoException {
         try {
             DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
@@ -56,10 +55,10 @@ public class ChamadoFacade {
             throw new AtualizarChamadoException("Erro ao finalizar chamado id =" + id, e);
         }
     }
-    
+
     public static List<Chamado> listarChamados() throws ListarChamadosException {
         try {
-            
+
             DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
             return dao.listarTodos();
 
@@ -70,7 +69,7 @@ public class ChamadoFacade {
 
     public static List<Chamado> listarChamadosPorIdCliente(Integer id) throws ListarChamadosException {
         try {
-            
+
             DAOChamado dao = new DAOChamado(new ConnectionDAO().conectaDB());
             return dao.listaMeusChamados(id);
 
@@ -78,17 +77,17 @@ public class ChamadoFacade {
             throw new ListarChamadosException("Erro ao listar os chamados do cliente id = " + id, e);
         }
     }
-    
-    public static void criarResposta(Resposta resposta) throws CriarRespostaException{
-        
+
+    public static void criarResposta(Resposta resposta) throws CriarRespostaException {
+
         try {
-            
+
             DAOResposta dao = new DAOResposta(new ConnectionDAO().conectaDB());
             dao.criar(resposta);
 
-        }catch (DAOException e) {
+        } catch (DAOException e) {
             throw new CriarRespostaException("Erro ao criar a resposta id = " + resposta.getId(), e);
         }
-        
+
     }
 }
