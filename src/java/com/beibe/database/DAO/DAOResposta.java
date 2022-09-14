@@ -1,6 +1,5 @@
 package com.beibe.database.DAO;
 
-import com.beibe.database.IDAO;
 import com.beibe.database.IDAOResposta;
 import com.beibe.model.Funcionario;
 
@@ -10,8 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import com.beibe.utils.SqlUtils;
 import com.beibe.utils.exceptions.DAOException;
+import java.sql.SQLException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -30,7 +29,7 @@ public class DAOResposta implements IDAOResposta {
     }
 
     @Override
-    public void criar(Resposta vo) {
+    public void criar(Resposta vo) throws DAOException {
 
         try {
             PreparedStatement st = conn.prepareStatement("Insert into resposta( texto, chamado_id, funcionario_id) "
@@ -48,8 +47,9 @@ public class DAOResposta implements IDAOResposta {
             }
             System.out.println("DAO + " + vo.getTexto());
             st.execute();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException  e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
 
     }
@@ -60,7 +60,7 @@ public class DAOResposta implements IDAOResposta {
     }
 
     @Override
-    public List<Resposta> listaTodosPorChamado(Integer id) {
+    public List<Resposta> listaTodosPorChamado(Integer id) throws DAOException{
         List<Resposta> respostas = new ArrayList<Resposta>();
         try {
 
@@ -91,8 +91,9 @@ public class DAOResposta implements IDAOResposta {
 
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException  e) {
+            e.printStackTrace();
+            throw new DAOException(e);
         }
 
         return respostas;
