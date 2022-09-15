@@ -2,21 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.beibe.servlets.chamados;
+package com.beibe.servlets.funcionario;
 
-import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOChamado;
-import com.beibe.database.DAO.DAOResposta;
-import com.beibe.facade.ChamadoFacade;
-import com.beibe.model.Cliente;
+import com.beibe.facade.FuncionarioFacade;
 import com.beibe.model.Funcionario;
-import com.beibe.model.Resposta;
-import com.beibe.utils.exceptions.chamadosExceptions.AtualizarChamadoException;
+import com.beibe.utils.exceptions.funcionarioExceptions.BuscarFuncionarioException;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,8 +21,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "FinalizarChamado", urlPatterns = {"/FinalizarChamado"})
-public class FinalizarChamado extends HttpServlet {
+@WebServlet(name = "ListarFuncionarios", urlPatterns = {"/ListarFuncionarios"})
+public class ListarFuncionarios extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,33 +35,36 @@ public class FinalizarChamado extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+      
+       
+
         try {
 
-            Integer id = Integer.parseInt(request.getParameter("id"));
-
+          
+            FuncionarioFacade facade = new FuncionarioFacade(); 
             
+                    HttpSession session = request.getSession(false);
+                    if(session.getAttribute("funcionario") == null){
+                        
+                        response.sendRedirect("login-funcionario.jsp");
+                        return;
+                    }
+                    List<Funcionario> funcionarios = facade.listarTodos();
+                        
+                    request.setAttribute("funcionarios", funcionarios);
+                    
 
-            HttpSession session = request.getSession(false);
-            Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
-              Cliente cliente = (Cliente) session.getAttribute("cliente");
-
-            if (funcionario != null || cliente != null) {
-                
-                ChamadoFacade.finalizarChamado(id);
-                if(cliente!=null){
-                    response.sendRedirect("MeusChamados");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/lista-usuarios.jsp");
+                    rd.forward(request, response);
                     return;
-                }
-                
-            }
+              
+         
 
-            response.sendRedirect("ListarChamados");
-            return;
-
-        } catch (AtualizarChamadoException e) {
-            e.printStackTrace(); 
-            response.sendRedirect("index.jsp"); 
+        } catch (BuscarFuncionarioException e) {
+            request.setAttribute("msg", "Não foi listar os usuários!");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-funcionario.jsp");
+            rd.forward(request, response);
+            
             return;
         }
     }

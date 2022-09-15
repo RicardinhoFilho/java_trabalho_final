@@ -27,4 +27,31 @@ public class ClienteFacade  {
 
     }
     
+    
+     public static void criarCliente(Cliente cliente) throws BuscarClienteException{ 
+        try {
+
+            DAOCliente dao = new DAOCliente(new ConnectionDAO().conectaDB());
+         dao.criar(cliente);
+             return;
+
+        } catch (DAOException e) {
+            throw new BuscarClienteException("Erro ao listar as categorias ", e);
+        }
+
+    }
+     
+     public static void editarCliente(Cliente cliente) throws BuscarClienteException{ 
+        try {
+
+            DAOCliente dao = new DAOCliente(new ConnectionDAO().conectaDB());
+         dao.editar(cliente);
+             return;
+
+        } catch (DAOException e) {
+            throw new BuscarClienteException("Erro ao listar as categorias ", e);
+        }
+
+    }
+    
 }

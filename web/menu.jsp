@@ -38,7 +38,7 @@
                     <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                         <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                             <a class="nav-link" href="index.html">Métricas</a>
-                            <a class="nav-link" href="lista-usuarios.jsp">Listar usuários</a>
+                            <a class="nav-link" href="ListarFuncionarios">Listar usuários</a>
                             <a class="nav-link" href="usuarios.html">Cadastrar usuários</a>
                             <a class="nav-link" href="ListarChamados">Chamados</a>
                             <a class="nav-link" href="ListaProdutos">Listar produtos</a>
@@ -76,7 +76,7 @@
                 <div class="collapse" id="collapse" data-bs-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordion">
                         <a class="nav-link" href="MeusChamados">Meus chamados</a>
-                        <a class="nav-link" href="editarCliente.html">Alterar cadastro</a>
+                        <a class="nav-link" href="alterar-cadastro-cliente.jsp">Alterar cadastro</a>
                     </nav>
                 </div>
 

@@ -2,31 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.beibe.servlets.chamados;
+package com.beibe.servlets.cliente;
 
-import com.beibe.database.ConnectionDAO;
-import com.beibe.database.DAO.DAOChamado;
-import com.beibe.database.DAO.DAOResposta;
-import com.beibe.facade.ChamadoFacade;
+import com.beibe.facade.ClienteFacade;
 import com.beibe.model.Cliente;
-import com.beibe.model.Funcionario;
-import com.beibe.model.Resposta;
-import com.beibe.utils.exceptions.chamadosExceptions.AtualizarChamadoException;
+import com.beibe.utils.exceptions.clienteExceptions.BuscarClienteException;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "FinalizarChamado", urlPatterns = {"/FinalizarChamado"})
-public class FinalizarChamado extends HttpServlet {
+@WebServlet(name = "CadastrarCliente", urlPatterns = {"/CadastrarCliente"})
+public class CadastrarCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,33 +35,28 @@ public class FinalizarChamado extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        String email = request.getParameter("email");
+        String nome = request.getParameter("nome");
+        String sobrenome = request.getParameter("sobrenome");
+
+        //Boolean isAdmin = request.getParameter("admin").equals("1") ? true : false;
+        String senha = request.getParameter("senha");
+        Cliente cliente = new Cliente();
+
         try {
+            cliente.setEmail(email);
+            cliente.setNome(nome);
+            cliente.setSenha(senha);
+            cliente.setSobrenome(sobrenome);
 
-            Integer id = Integer.parseInt(request.getParameter("id"));
-
-            
-
-            HttpSession session = request.getSession(false);
-            Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
-              Cliente cliente = (Cliente) session.getAttribute("cliente");
-
-            if (funcionario != null || cliente != null) {
-                
-                ChamadoFacade.finalizarChamado(id);
-                if(cliente!=null){
-                    response.sendRedirect("MeusChamados");
-                    return;
-                }
-                
-            }
-
-            response.sendRedirect("ListarChamados");
+            ClienteFacade.criarCliente(cliente);
+            response.sendRedirect("login-cliente.jsp");
             return;
+        } catch (BuscarClienteException e) {
+            request.setAttribute("msg", "Não foi possível fazer cadastro!");
 
-        } catch (AtualizarChamadoException e) {
-            e.printStackTrace(); 
-            response.sendRedirect("index.jsp"); 
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login-cliente.jsp");
+            rd.forward(request, response);
             return;
         }
     }

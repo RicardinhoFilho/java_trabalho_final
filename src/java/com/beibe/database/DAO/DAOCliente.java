@@ -28,7 +28,7 @@ public class DAOCliente implements IClienteDAO {
     @Override
     public Cliente buscaPorEmail(String email) throws DAOException {
         Cliente cliente = new Cliente();
-        System.out.println(email + " CHEGOU AQUI");
+
         try {
 
             PreparedStatement st = conn.prepareStatement("select * from  cliente  where email = ?");
@@ -55,24 +55,56 @@ public class DAOCliente implements IClienteDAO {
 
     }
 
-
     @Override
     public List listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void criar(Object vo) throws DAOException {
+    public void excluir(int id) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void criar(Cliente vo) throws DAOException {
+        try {
+            System.out.println(vo.getNome() + vo.getEmail() + vo.getSenha() + "" + vo.getSobrenome());
+            PreparedStatement st = conn.prepareStatement("insert into cliente(nome, sobrenome, email, senha) "
+                    + "values(?,?,?,?)");
+            st.setString(1, vo.getNome());
+            st.setString(2, vo.getSobrenome());
+            st.setString(3, vo.getEmail());
+            st.setString(4, vo.getSenha());
+            st.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public void editar(Cliente vo) throws DAOException {
+        try {
+            System.out.println(vo.getNome() + vo.getEmail() + vo.getSenha() + "" + vo.getSobrenome());
+            PreparedStatement st = conn.prepareStatement("update cliente set nome = ? , sobrenome = ?, email = ?, senha = ? "
+                    + "where id = ? ;");
+            st.setString(1, vo.getNome());
+            st.setString(2, vo.getSobrenome());
+            st.setString(3, vo.getEmail());
+            st.setString(4, vo.getSenha());
+            st.setInt(5, vo.getId());
+            st.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException(e);
+        }
+        return;
     }
 
     @Override
     public void atualizar(int id) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void excluir(int id) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

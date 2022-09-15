@@ -11,8 +11,10 @@ import com.beibe.utils.exceptions.DAOException;
  *
  * @author User
  */
-public interface IClienteDAO extends IDAO{
+public interface IClienteDAO extends IDAO<Cliente>{
     
     Cliente buscaPorEmail(String email) throws DAOException;
+    
+    void editar(Cliente vo) throws DAOException;
     
 }

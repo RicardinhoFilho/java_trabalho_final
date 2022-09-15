@@ -9,6 +9,7 @@ import com.beibe.database.DAO.DAOFuncionario;
 import com.beibe.model.Funcionario;
 import com.beibe.utils.exceptions.DAOException;
 import com.beibe.utils.exceptions.funcionarioExceptions.BuscarFuncionarioException;
+import java.util.List;
 
 /**
  *
@@ -29,4 +30,17 @@ public class FuncionarioFacade {
           
     }
     
+    
+     public static List<Funcionario> listarTodos() throws BuscarFuncionarioException {
+
+        try {
+            
+            DAOFuncionario dao = new DAOFuncionario(new ConnectionDAO().conectaDB());
+            return dao.listarTodos();
+
+        } catch (DAOException e) {
+            throw new BuscarFuncionarioException("Erro ao listar as categorias ", e);
+        }
+          
+    }
 }

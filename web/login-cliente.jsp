@@ -66,7 +66,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="cadastroSimples.html">Criar uma conta</a></div>
+                                        <div class="small"><a href="cadastrar-cliente.jsp">Criar uma conta</a></div>
                                     </div>
                                 </div>
                             </div>
