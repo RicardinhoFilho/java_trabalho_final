@@ -8,6 +8,8 @@ import com.beibe.database.ConnectionDAO;
 import com.beibe.model.Produto;
 import com.beibe.database.DAO.DAOProduto;
 import com.beibe.utils.exceptions.DAOException;
+import com.beibe.utils.exceptions.produtosExceptions.ExcluirProdutoException;
+import com.beibe.utils.exceptions.produtosExceptions.ListarProdutosException;
 import java.util.List;
 
 /**
@@ -16,12 +18,26 @@ import java.util.List;
  */
 public class ProdutosFacade {
     
-    public List<Produto> listarProdutos() throws DAOException{
-         DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
-
-            
+    public static List<Produto> listarProdutos() throws ListarProdutosException{
+        
+        try{
+            DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
             return dao.listarTodos();
+        }catch(DAOException e){
+            System.out.println(e);
+            throw new ListarProdutosException("Erro ao obter lista de produtos", e);
+        }
+        
     }
-   
     
+    public static void excluirProduto(int id) throws ExcluirProdutoException {
+        try{
+            DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
+            dao.excluirProduto(id);
+        }catch(DAOException e){
+            System.out.println(e);
+            throw new ExcluirProdutoException("Erro ao excluir produto id =" + id, e);            
+        }       
+   
+    }
 }

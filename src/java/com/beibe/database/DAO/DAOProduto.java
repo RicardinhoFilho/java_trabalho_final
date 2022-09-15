@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.beibe.utils.SqlUtils;
 import com.beibe.utils.exceptions.DAOException;
+import java.sql.SQLException;
 
 /**
  *
@@ -29,7 +30,7 @@ public class DAOProduto implements IProdutoDAO {
     }
 
     @Override
-    public void criar(Produto vo) {
+    public void criar(Produto vo) throws DAOException {
 
         try {
             PreparedStatement st = conn.prepareStatement("Insert into produto( nome, preco, validade, saldo) "
@@ -39,13 +40,13 @@ public class DAOProduto implements IProdutoDAO {
             st.setDate(3, SqlUtils.convert(vo.getValidade()));
             st.setInt(4, vo.getSaldo());
             st.execute();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
+            throw new DAOException();
         }
-
     }
 
-    public void editar(Produto vo) {
+    public void editar(Produto vo) throws DAOException {
         //não sei pq isso n ta funcionando jhahaha, se alguem descobrir S2 by Ricardinho
         try {
             PreparedStatement st = conn.prepareStatement("update  produto set nome = ?, preco =?, saldo= ?, validade = ? where id = ? ");
@@ -56,14 +57,15 @@ public class DAOProduto implements IProdutoDAO {
             st.setInt(5, vo.getId());
 
             st.execute();
-        } catch (Exception e) {
+        }catch (SQLException e) {
             System.out.println(e);
+            throw new DAOException();
         }
 
     }
 
     @Override
-    public List<Produto> listarTodos() {
+    public List<Produto> listarTodos() throws DAOException {
         List<Produto> produtos = new ArrayList<Produto>();
         try {
 
@@ -82,21 +84,22 @@ public class DAOProduto implements IProdutoDAO {
                 produtos.add(produto);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
-
+            throw new DAOException();
         }
         return produtos;
     }
 
-    public void excluirProduto(Integer id) {
+    public void excluirProduto(Integer id) throws DAOException {
 
         try {
             PreparedStatement st = conn.prepareStatement("delete from produto where id = ?");
             st.setInt(1, id);
             st.execute();
-        } catch (Exception e) {
+        }catch (SQLException e) {
             System.out.println(e);
+            throw new DAOException();
         }
 
     }

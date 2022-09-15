@@ -34,8 +34,26 @@
                             <!-- Sidenav Menu Heading (Core)-->
                             <jsp:include page="menu.jsp"/>
                         </div>
+<<<<<<< HEAD
                     </div>
                 </nav>
+=======
+                    </h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="login.html">
+                        <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                        Sair
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sidenav shadow-right sidenav-light">
+                <jsp:include page="menu.jsp"/>
+            </nav>
+>>>>>>> 4105adb11b1ffff30b1035d7a880e5c25129dc4c
 
             </div>
             <div id="layoutSidenav_content">

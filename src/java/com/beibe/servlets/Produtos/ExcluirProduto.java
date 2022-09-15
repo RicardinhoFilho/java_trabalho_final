@@ -6,9 +6,9 @@ package com.beibe.servlets.Produtos;
 
 import com.beibe.database.ConnectionDAO;
 import com.beibe.database.DAO.DAOProduto;
-import jakarta.servlet.RequestDispatcher;
+import com.beibe.facade.ProdutosFacade;
+import com.beibe.utils.exceptions.produtosExceptions.ExcluirProdutoException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,17 +34,17 @@ public class ExcluirProduto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          try {
+        try {
             Integer id = Integer.parseInt(request.getParameter("id"));
-            DAOProduto dao = new DAOProduto(new ConnectionDAO().conectaDB());
+            ProdutosFacade.excluirProduto(id);
+            response.sendRedirect("ListaProdutos");
 
-           dao.excluirProduto(id);
-             response.sendRedirect("ListaProdutos");
-
-            
-
-        } catch (Exception e) {
+        } catch (ExcluirProdutoException e) {
             System.out.println(e);
+            response.sendRedirect("erro.jsp");
+        }catch(NumberFormatException e){
+            System.out.println(e);
+            response.sendRedirect("erro.jsp");
         }
     }
 
