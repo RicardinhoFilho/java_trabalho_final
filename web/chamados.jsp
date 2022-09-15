@@ -138,10 +138,7 @@
                             <div class="sbp-preview">
                                 <div class="sbp-preview-content">
                                     <div class="timeline">
-                                        <%  List<Chamado> chamados= (List<Chamado>) request.getAttribute("chamados"); 
-
-                                         
-                                        %>
+                                        <%  List<Chamado> chamados= (List<Chamado>) request.getAttribute("chamados");%>
 
                                         <c:forEach var="item" items="${chamados}">
 

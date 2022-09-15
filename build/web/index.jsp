@@ -287,9 +287,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </div>
 
                 </c:when>
-                    <c:otherwise>
-                        <h1></h1>
-                    </c:otherwise>
+                <c:otherwise>
+                    <h1></h1>
+                </c:otherwise>
 
             </c:choose>     
 

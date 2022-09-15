@@ -26,10 +26,7 @@
 
         <c:choose>
             <c:when test="${sessionScope.funcionario != null}">
-                <% Funcionario funcionario= (Funcionario) session.getAttribute("funcionario"); %>
-
-
-                <c:if test="${funcionario.isAdmin()}">
+                <c:if test="${sessionScope.funcionario.isAdmin()}">
                     <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
                         <div class="nav-link-icon"><i data-feather="activity"></i></div>
                         Administrador
